@@ -22,7 +22,6 @@ const getUserWithEmail = function(email) {
     if (res.rows.length === 0) return Promise.resolve(null);
     return Promise.resolve(res.rows[0]);
   })
-  .catch((err) => console.error('Error executing query', err.stack));
 }
 exports.getUserWithEmail = getUserWithEmail;
 
@@ -37,7 +36,6 @@ const getUserWithId = function(id) {
     if (res.rows.length === 0) return Promise.resolve(null);
     return Promise.resolve(res.rows[0]);
   })
-  .catch((err) => console.error('Error executing query', err.stack))
 }
 exports.getUserWithId = getUserWithId;
 
@@ -52,7 +50,6 @@ const addUser =  function(user) {
   .then (res => {
     return Promise.resolve(res.rows);
   })
-  .catch ((err) => console.error('Error executing query', err.stack));
 }
 exports.addUser = addUser;
 
@@ -74,9 +71,7 @@ const getAllReservations = function(guest_id, limit = 10) {
     GROUP BY properties.id, reservations.id
     ORDER BY reservations.start_date
     LIMIT 10;`, [guest_id])
-.then(res =>
-  Promise.resolve(res.rows))
-.catch((err) => console.error('Error executing query', err.stack));
+  .then(res => Promise.resolve(res.rows));
 }
 exports.getAllReservations = getAllReservations;
 
